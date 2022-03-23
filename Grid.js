@@ -64,6 +64,13 @@ class Grid {
       });
     }
   }
+
+  getCellAtMap(x, y) {
+    for (let i = 0; i < this.cells.length; i++) {
+      if (this.cells[i].mapPosition.x == x && this.cells[i].mapPosition.y == y)
+        return this.cells[i];
+    }
+  }
 }
 
 class Row {

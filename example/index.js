@@ -10,6 +10,4 @@ function generateGrid(rows, columns) {
 function cellLeftClicked(e, cell) {
   console.log("CLICKED CELL:", cell);
   cell.div.innerHTML = "💥";
-
-  console.log("x: ", cell.mapPosition.x, "y: ", cell.mapPosition.y);
 }
