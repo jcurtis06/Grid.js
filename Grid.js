@@ -31,7 +31,7 @@ class Grid {
 
     for (let i = 0; i < this.cells.length; i++) {
       this.cells[i].generateDiv(rowDiv);
-      if ((i + 1) % this.columnCount == 0) {
+      if ((i + 1) % this.rowCount == 0) {
         rowDiv = document.createElement("div");
         rowDiv.classList.add("row");
       }
