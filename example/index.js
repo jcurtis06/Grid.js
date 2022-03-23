@@ -4,10 +4,12 @@ function generateGrid(rows, columns) {
   grid = new Grid(rows, columns);
   grid.generate();
 
-  grid.addLeftClickListeners(cellLeftClicked, true);
+  grid.addListeners("click", cellLeftClicked, true);
 }
 
-function cellLeftClicked(cell) {
+function cellLeftClicked(e, cell) {
   console.log("CLICKED CELL:", cell);
-  cell.div.innerHTML = "🎉";
+  cell.div.innerHTML = "💥";
+
+  console.log("x: ", cell.mapPosition.x, "y: ", cell.mapPosition.y);
 }

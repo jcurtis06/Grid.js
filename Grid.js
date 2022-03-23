@@ -24,18 +24,21 @@ class Grid {
       this.cells.push(new Cell(i));
     }
 
-    let rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
+    let rowCounter = 0;
 
-    this.rows.push(rowDiv);
+    let row = new Row(rowCounter);
+    row.generateDiv();
+
+    this.rows.push(row);
 
     for (let i = 0; i < this.cells.length; i++) {
-      this.cells[i].generateDiv(rowDiv);
+      this.cells[i].generateDiv(row);
       if ((i + 1) % this.rowCount == 0) {
-        rowDiv = document.createElement("div");
-        rowDiv.classList.add("row");
+        rowCounter++;
+        row = new Row(rowCounter);
+        row.generateDiv();
       }
-      gridElement.appendChild(rowDiv);
+      gridElement.appendChild(row.div);
     }
   }
 
@@ -63,10 +66,22 @@ class Grid {
   }
 }
 
+class Row {
+  constructor(index) {
+    this.index = index;
+  }
+
+  generateDiv() {
+    if (this.div) return;
+    this.div = document.createElement("div");
+    this.div.classList.add("row");
+  }
+}
+
 class Cell {
   constructor(id) {
     this.id = id;
-    this.cellType = 0;
+    this.mapPosition;
   }
 
   generateDiv(row) {
@@ -75,6 +90,15 @@ class Cell {
     this.div = document.createElement("div");
     this.div.className = "cell";
 
-    row.appendChild(this.div);
+    this.mapPosition = new Vector2(row.index, this.id % grid.rowCount);
+
+    row.div.appendChild(this.div);
+  }
+}
+
+class Vector2 {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
