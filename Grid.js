@@ -1,7 +1,6 @@
 /*
 Grid.js
 Created by Jonathan Curtis
-3/18/2022
 */
 
 let gridElement = document.getElementById("grid");
@@ -40,21 +39,25 @@ class Grid {
     }
   }
 
-  regenerate() {
+  regenerate(rows, columns) {
+    if (rows && columns) {
+      this.rowCount = rows;
+      this.columnCount = columns;
+    }
+
     gridElement.innerHTML = "";
     this.generate();
 
-    if (this.leftClick && this.keepAcrossResets)
-      this.addLeftClickListeners(this.leftClick);
+    if (this.keepAcrossResets) this.addListeners(this.leftClick);
   }
 
-  addLeftClickListeners(method, keepAcrossResets) {
+  addListeners(event, method, keepAcrossResets) {
     this.leftClick = method;
     this.keepAcrossResets = keepAcrossResets;
 
     for (let i = 0; i < this.cells.length; i++) {
-      this.cells[i].div.addEventListener("click", (e) => {
-        method(this.cells[i]);
+      this.cells[i].div.addEventListener(event, (e) => {
+        method(e, this.cells[i]);
       });
     }
   }
